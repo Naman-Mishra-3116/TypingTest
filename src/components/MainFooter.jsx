@@ -7,12 +7,19 @@ import { NavLink } from "react-router-dom";
 const year = new Date().getFullYear();
 
 const MainFooter = () => {
+  const ScrollToPrivacyPolicy = function () {
+    window.scrollTo({ behavior: "smooth", top: 0 });
+  };
+
   return (
-    <div className="flex flex-col gap-4 mt-[100px]">
+    <div className="flex flex-col gap-4 mt-[700px]" id="CONTACTUS">
       <hr className="border-slate-800 border-2 mb-5" />
       <p className="text-md text-slate-400 mb-3 hover:underline hover:text-slate-200">
         Contact Us
       </p>
+      <NavLink end onClick={ScrollToPrivacyPolicy} to={"/privacy"}>
+        Privacy Policy
+      </NavLink>
       <nav className="flex gap-7 self-center">
         <NavLink
           target="_blank"
@@ -21,6 +28,7 @@ const MainFooter = () => {
           className="hover:scale-110 duration-75 transition ease-in"
         >
           <img src={twitter} alt="twitter logo" width={30} height={30} />
+          
         </NavLink>
         <NavLink
           target="_blank"

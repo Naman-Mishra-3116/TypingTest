@@ -1,14 +1,14 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./Pages/ErrorPage";
-import HomePage from "./Pages/HomePage";
-import LeaderBoard from "./Pages/LeaderBoard";
+import ErrorPage from "../src/Pages/ErrorPage";
 import About from "./Pages/About";
-import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
-import RootElement from "./Pages/RootElement";
-import Reset from "./Pages/Reset";
-
+import Login from "./formPages/Login";
+import Signup from "./formPages/Signup";
+import Reset from "./formPages/Reset";
+import RootElement from "../src/Pages/RootElement";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import LeaderBoard from "./Pages/LeaderBoard";
+import HomePage from "./Pages/HomePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +23,7 @@ function App() {
         { path: "/login", element: <Login /> },
         { path: "/signup", element: <Signup /> },
         { path: "/reset", element: <Reset /> },
+        { path: "/privacy", element: <PrivacyPolicy /> },
       ],
     },
   ]);

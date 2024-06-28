@@ -41,6 +41,7 @@ const MainNavigation = () => {
         </NavLink>
         <NavLink
           to={"/discord"}
+          target="_blank"
           end
           className={({ isActive }) => {
             return isActive

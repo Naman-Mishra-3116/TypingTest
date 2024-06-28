@@ -1,8 +1,11 @@
 import React from "react";
 import Input from "../UI/Input";
 import NavigationFor from "../UI/NavigationFor";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigator = useNavigate();
   function onClickLoginButton(event) {
     event.preventDefault();
     const fd = new FormData(event.target);
@@ -10,6 +13,8 @@ const Login = () => {
     console.log(data);
 
     // api for login in progress.
+    navigator("/");
+    
   }
 
   return (

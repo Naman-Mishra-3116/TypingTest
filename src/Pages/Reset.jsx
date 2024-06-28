@@ -1,8 +1,12 @@
 import React from "react";
 import Input from "../UI/Input";
 import NavigationFor from "../UI/NavigationFor";
+import { useNavigate } from "react-router-dom";
 
 const Reset = () => {
+  const navigator = useNavigate();
+
+  
   function onClickResetButton(event) {
     event.preventDefault();
     const fd = new FormData(event.target);
@@ -10,6 +14,9 @@ const Reset = () => {
     console.log(data);
 
     // reset api in progress.
+
+
+    navigator("/login");
   }
 
   return (

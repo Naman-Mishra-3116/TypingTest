@@ -1,6 +1,11 @@
 import React from "react";
 import logo from "../../public/logo.png";
 import { NavLink } from "react-router-dom";
+import {
+  styleFunctionForFirstLink,
+  styleFunctionForLastLink,
+  styleFunctionForMiddleLink,
+} from "../utils/navigationStyleFunction.function.js";
 
 const MainNavigation = () => {
   return (
@@ -16,71 +21,31 @@ const MainNavigation = () => {
       </h2>
 
       <nav className="mt-[3rem] flex gap-4">
-        <NavLink
-          to={"/"}
-          end
-          className={({ isActive }) => {
-            return isActive
-              ? "bg-[#1a1a1a] px-4 py-[10px] self-center rounded-md"
-              : "px-4 py-[10px] self-center rounded-md bg-[#1585e0]";
-          }}
-        >
+        <NavLink to={"/"} end className={styleFunctionForFirstLink}>
           Test
         </NavLink>
 
-        <NavLink
-          to={"/leaderboard"}
-          end
-          className={({ isActive }) => {
-            return isActive
-              ? "bg-[#1a1a1a] px-4 py-[10px] self-center rounded-md"
-              : "px-4 py-[10px] rounded-md hover:bg-[#1a1a1a] self-center";
-          }}
-        >
+        <NavLink to={"/leaderboard"} end className={styleFunctionForMiddleLink}>
           LeaderBoard
         </NavLink>
         <NavLink
           to={"/discord"}
           target="_blank"
+          className={styleFunctionForMiddleLink}
           end
-          className={({ isActive }) => {
-            return isActive
-              ? "bg-[#1a1a1a] px-4 py-[10px] self-center rounded-md"
-              : "px-4 py-[10px] rounded-md hover:bg-[#1a1a1a] self-center";
-          }}
         >
           Discord
         </NavLink>
-        <NavLink
-          to={"/about"}
-          end
-          className={({ isActive }) => {
-            return isActive
-              ? "bg-[#1a1a1a] px-4 py-[10px] rounded-md self-center"
-              : "px-4 py-[10px] rounded-md hover:bg-[#1a1a1a] self-center";
-          }}
-        >
+        <NavLink to={"/about"} end className={styleFunctionForMiddleLink}>
           About
         </NavLink>
-        <NavLink
-          to={"/login"}
-          end
-          className={({ isActive }) => {
-            return isActive
-              ? "bg-[#1a1a1a] px-4 py-[10px] rounded-md self-center"
-              : "px-4 py-[10px] rounded-md hover:bg-[#1a1a1a] self-center";
-          }}
-        >
+        <NavLink to={"/login"} end className={styleFunctionForMiddleLink}>
           Log In
         </NavLink>
         <NavLink
-          to={"/signup"}
+          to={true ? "/stats" : "/signup"}
           end
-          className={({ isActive }) => {
-            return isActive
-              ? "bg-secondary-blue px-4 text-center self-center py-[10px] rounded-md"
-              : "px-4 py-[10px] rounded-md hover:bg-secondary-blue bg-primary-blue self-center";
-          }}
+          className={styleFunctionForLastLink}
         >
           Sign Up
         </NavLink>

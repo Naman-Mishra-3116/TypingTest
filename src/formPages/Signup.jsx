@@ -6,14 +6,12 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigator = useNavigate();
   function handleOnClickSubmit(event) {
-
     event.preventDefault();
     const fd = new FormData(event.target);
     const data = Object.fromEntries(fd.entries());
     console.log(data);
 
     // api in progress
-
     // navigate to login automatically if the signup is successfull
     navigator("/login");
   }
@@ -40,7 +38,11 @@ const Signup = () => {
             Sign Up
           </button>
         </form>
-        <NavigationFor navigateTo={"login"} label={"Log In"} description={"Already have an account?"}/>
+        <NavigationFor
+          navigateTo={"login"}
+          label={"Log In"}
+          description={"Already have an account?"}
+        />
       </div>
     </div>
   );

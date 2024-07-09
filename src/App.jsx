@@ -9,6 +9,10 @@ import RootElement from "../src/Pages/RootElement";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import LeaderBoard from "./Pages/LeaderBoard";
 import HomePage from "./Pages/HomePage";
+import StatsPage from "./Stats/StatsPage";
+import DetailsPage from "./Stats/Details";
+import UpdateEmail from "./formPages/UpdateEmail";
+import ChangePassword from "./formPages/ChangePassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,13 +21,23 @@ function App() {
       element: <RootElement />,
       errorElement: <ErrorPage />,
       children: [
-        { path: "/", element: <HomePage /> },
+        { index: true, element: <HomePage /> },
         { path: "/leaderboard", element: <LeaderBoard /> },
         { path: "/about", element: <About /> },
         { path: "/login", element: <Login /> },
         { path: "/signup", element: <Signup /> },
         { path: "/reset", element: <Reset /> },
         { path: "/privacy", element: <PrivacyPolicy /> },
+        {
+          path: "/stats",
+          element: <StatsPage />,
+          errorElement: <ErrorPage />,
+          children: [
+            { index: true, element: <DetailsPage /> },
+            { path: "/stats/changeEmail", element: <UpdateEmail /> },
+            { path: "/stats/changePassword", element: <ChangePassword /> },
+          ],
+        },
       ],
     },
   ]);

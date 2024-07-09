@@ -13,7 +13,7 @@ const MainFooter = () => {
 
   return (
     <div className="flex flex-col gap-4 mt-[700px]" id="CONTACTUS">
-      <hr className="border-slate-800 border-2 mb-5" />
+      <hr className="border-gray-700 border-1 mb-5" />
       <p className="text-md text-slate-400 mb-3 hover:underline hover:text-slate-200">
         Contact Us
       </p>

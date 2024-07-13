@@ -8,7 +8,8 @@ export const signupControllerFunction = async function (req, res) {
 
     if (existingUser) {
       return res.status(409).json({
-        message: "A user with username or email already exist you can login", 
+        message:
+          "A user with username or email already exist, Try logging in or using a different username",
         success: false,
       });
     }

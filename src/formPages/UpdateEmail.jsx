@@ -1,6 +1,8 @@
 import React from "react";
 import Input from "../UI/Input";
+import { useSelector } from "react-redux";
 const UpdateEmail = () => {
+  const email = useSelector((state) => state.valid.email);
   function onClickEmailChangeButton(event) {
     event.preventDefault();
     const fd = new FormData(event.target);
@@ -15,7 +17,13 @@ const UpdateEmail = () => {
           Change Email
         </p>
         <form onSubmit={onClickEmailChangeButton} className="mt-3 mb-4">
-          <Input title="Email" name="email" id="email" type="email" />
+          <Input
+            title="Email"
+            name="email"
+            id="email"
+            type="email"
+            placeholder={email != undefined ? email : ""}
+          />
 
           <button
             type="submit"

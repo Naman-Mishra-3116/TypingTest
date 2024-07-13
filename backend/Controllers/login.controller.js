@@ -30,9 +30,7 @@ export const loginControllerFunction = async function (req, res) {
     const jwtToken = jsonwebtoken.sign(
       { email, username: existingUser.username },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
+      { expiresIn: "30d" }
     );
 
     res.status(200).json({
@@ -47,6 +45,7 @@ export const loginControllerFunction = async function (req, res) {
       message: "Internal server error",
       success: false,
       error: error.message,
+      test: "error occuring in login",
     });
   }
 };

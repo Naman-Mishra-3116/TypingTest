@@ -1,9 +1,56 @@
 import React from "react";
 import Input from "../UI/Input";
-
+import { createToast } from "../../utils/createToast";
+import { useDispatch } from "react-redux";
+import { authFunction } from "../../Store/authentication.store";
+import { useNavigate } from "react-router-dom";
 const ChangePassword = () => {
-  const onClickChangePassword = (event) => {
-    event.preventDefaut();
+  const dispatch = useDispatch();
+  const navigateTo = useNavigate();
+  const onClickChangePassword = async function (event) {
+    event.preventDefault();
+    try {
+      const fd = new FormData(event.target);
+      const { currentPassword, newPassword, confirmPassword } =
+        Object.fromEntries(fd.entries());
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:5000/auth/changePassword",
+        {
+          method: "POST",
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currentPassword,
+            newPassword,
+            confirmPassword,
+          }),
+        }
+      );
+      const { success, error, message } = await response.json();
+      if (success) {
+        createToast(message, "success");
+        localStorage.removeItem("token");
+        dispatch(
+          authFunction.setAllData({
+            email: "",
+            auth: false,
+            token: "",
+            name: "",
+          })
+        );
+        setTimeout(() => {
+          navigateTo("/");
+          window.scrollTo({ behavior: "smooth", top: 0 });
+        }, 3000);
+      } else if (error) {
+        createToast(message, "error");
+      } else if (!success) {
+        console.log(error, message);
+      }
+    } catch (error) {}
   };
 
   return (
@@ -28,7 +75,7 @@ const ChangePassword = () => {
           <Input
             type={"password"}
             id="pass"
-            name="password"
+            name="confirmPassword"
             title={"Confirm New Password"}
           />
           <button

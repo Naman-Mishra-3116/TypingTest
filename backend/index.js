@@ -5,7 +5,7 @@ import cors from "cors";
 import { connectDatabase } from "./Database/connection.database.js";
 import { postRouter } from "./Routes/postRouter.router.js";
 import { getRouter } from "./Routes/getRouter.router.js";
-
+import { deleteRouter } from "./Routes/deleteRouter.router.js";
 /**
  * @config for hanlding environement variables in the project
  */
@@ -39,6 +39,8 @@ app.get("/", (req, res) => {
 
 app.use(postRouter);
 app.use(getRouter);
+app.use(deleteRouter);
+
 /**
  * @function = for connecting the virtual cloud mongodb server.
  * @params = callback that will be executed only  when the connection will be established.

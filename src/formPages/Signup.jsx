@@ -1,20 +1,39 @@
 import React from "react";
 import Input from "../UI/Input";
 import NavigationFor from "../UI/NavigationFor";
+import { createToast } from "../../utils/createToast";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const navigator = useNavigate();
-  function handleOnClickSubmit(event) {
-    event.preventDefault();
-    const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    console.log(data);
+  const navigateTo = useNavigate();
 
-    // api in progress
-    // navigate to login automatically if the signup is successfull
-    navigator("/login");
-  }
+  const onSubmitSignupForm = async function (event) {
+    event.preventDefault();
+    try {
+      const fd = new FormData(event.target);
+      const { email, username, password } = Object.fromEntries(fd.entries());
+      const response = await fetch("http://localhost:5000/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, username, password }),
+      });
+      const { success, error, message } = await response.json();
+      if (success) {
+        createToast(message, "success");
+        setTimeout(() => {
+          navigateTo("/login");
+        }, 3000);
+      } else if (error) {
+        createToast(error, "error");
+      } else if (!success) {
+        createToast(message, "error");
+      }
+    } catch (error) {
+      createToast(error.message, "error");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -22,7 +41,7 @@ const Signup = () => {
         <p className="text-center bg-secondary-back p-4 rounded-lg mt-[3rem] self-center">
           Create an Account
         </p>
-        <form onSubmit={handleOnClickSubmit} className="mt-3">
+        <form onSubmit={onSubmitSignupForm} className="mt-3">
           <Input title="Username" name="username" id="username" type="text" />
           <Input title="Email" name="email" id="email" type="email" />
           <Input

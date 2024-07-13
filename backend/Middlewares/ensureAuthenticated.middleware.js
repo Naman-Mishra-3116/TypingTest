@@ -8,16 +8,17 @@ export const enusreAuthenticatedMiddleware = function (req, res, next) {
   if (!auth) {
     return res
       .status(403)
-      .json({ message: "Unauthorized Jwt token", success: false });
+      .json({ message: "You are not logged in", success: false });
   }
 
   try {
     const decoded = jsonwebtoken.verify(auth, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = JSON.stringify(decoded);
     next();
   } catch (error) {
+    console.log(error);
     return res.status(403).json({
-      message: "Unauthorized Jwt token is Required",
+      message: "Incorrect token",
       success: false,
       error: error.message,
     });

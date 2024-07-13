@@ -2,20 +2,58 @@ import React from "react";
 import Input from "../UI/Input";
 import NavigationFor from "../UI/NavigationFor";
 import { useNavigate } from "react-router-dom";
+import { createToast } from "../../utils/createToast";
+import { useDispatch } from "react-redux";
+import { authFunction } from "../../Store/authentication.store";
 
 const Login = () => {
+  const navigateTo = useNavigate();
+  const dispatch = useDispatch();
 
-  const navigator = useNavigate();
-  function onClickLoginButton(event) {
+  const onClickLoginButton = async function (event) {
     event.preventDefault();
-    const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    console.log(data);
-
-    // api for login in progress.
-    navigator("/");
-    
-  }
+    try {
+      const fd = new FormData(event.target);
+      const { email, password } = Object.fromEntries(fd.entries());
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const {
+        message,
+        success,
+        jwtToken,
+        email: UserEmail,
+        name,
+        error,
+      } = await response.json();
+      console.log({ message, success, jwtToken, UserEmail, name, error });
+      if (success) {
+        createToast(message, "success");
+        localStorage.setItem("token", jwtToken);
+        dispatch(
+          authFunction.setAllData({
+            token: jwtToken,
+            auth: success,
+            name,
+            email: UserEmail,
+          })
+        );
+        setTimeout(() => {
+          navigateTo("/");
+        }, 3000);
+      } else if (!success) {
+        createToast(message, "error");
+      } else if (error) {
+        createToast(error, "error");
+      }
+    } catch (error) {
+      createToast(error.message, "error");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -24,7 +62,7 @@ const Login = () => {
           Log In
         </p>
         <form onSubmit={onClickLoginButton} className="mt-3 mb-4">
-          <Input title="Username" name="username" id="username" type="text" />
+          <Input title="Email" name="email" id="email" type="email" />
           <Input
             type={"password"}
             id="pass"

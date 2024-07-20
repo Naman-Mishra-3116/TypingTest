@@ -1,9 +1,9 @@
 import React from "react";
-import twitter from "../../public/white_twitter.png";
-import mail from "../../public/white_mail.png";
-import linkedIn from "../../public/white_linkedin.png";
-import gitHub from "../../public/white_github.png";
+import { IoLogoGithub } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
+import { FaLinkedin } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+import { FaTwitter } from "react-icons/fa";
 const year = new Date().getFullYear();
 
 const MainFooter = () => {
@@ -27,8 +27,7 @@ const MainFooter = () => {
           end
           className="hover:scale-110 duration-75 transition ease-in"
         >
-          <img src={twitter} alt="twitter logo" width={30} height={30} />
-          
+          <FaTwitter color="white" size={30} />
         </NavLink>
         <NavLink
           target="_blank"
@@ -42,7 +41,7 @@ const MainFooter = () => {
           className="hover:scale-110 duration-75 transition ease-in"
           end
         >
-          <img src={mail} alt="mail logo" width={30} height={30} />
+          <SiGmail color="white" size={30} />
         </NavLink>
         <NavLink
           target="_blank"
@@ -52,7 +51,7 @@ const MainFooter = () => {
           className="hover:scale-110 duration-75 transition ease-in"
           end
         >
-          <img src={gitHub} alt="github logo" width={30} height={30} />
+          <IoLogoGithub size={30} color="white" />
         </NavLink>
         <NavLink
           target="_blank"
@@ -60,7 +59,7 @@ const MainFooter = () => {
           className="hover:scale-110 duration-75 transition-transform ease-in"
           end
         >
-          <img src={linkedIn} alt="Linkedin logo" width={30} height={30} />
+          <FaLinkedin size={30} color={"white"} />
         </NavLink>
       </nav>
       <p className="text-md text-slate-400 hover:text-slate-200">

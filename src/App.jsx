@@ -49,8 +49,7 @@ function App() {
           console.log(success, error, email, username);
         }
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

@@ -25,5 +25,38 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #242424;
+}
 
+.typing-test {
+  font-size: 1.6rem;
+  display: -webkit-box;
+  line-clamp: 2;
+  overflow: hidden;
+  line-height: 50px;
+}
+
+.typed {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.typed.scroll-out {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.curr-letter {
+  text-decoration: underline;
+}
+
+.rotate-animation {
+  animation: rotate 1s forwards;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 }

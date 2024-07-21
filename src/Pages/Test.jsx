@@ -20,7 +20,7 @@ const HomePage = () => {
 
   let maxWidth = 0;
   useEffect(() => {
-    maxWidth = textDivRef.current.offsetWidth-20;
+    maxWidth = textDivRef.current.offsetWidth - 20;
   });
 
   const {
@@ -69,8 +69,8 @@ const HomePage = () => {
         totalWidth.current += charElement.offsetWidth;
         if (
           totalWidth.current >= maxWidth ||
-          (charElement.getBoundingClientRect().right >=
-            textDivRef.current.getBoundingClientRect().right - 40)
+          charElement.getBoundingClientRect().right >=
+            textDivRef.current.getBoundingClientRect().right - 40
         ) {
           const elements = document.querySelectorAll(".typed");
           elements.forEach((element) => {
@@ -101,7 +101,8 @@ const HomePage = () => {
           >
             {text.split("").map((char, index) => {
               let state = charsState[index];
-              let color = state === 0 ? "white" : state === 1 ? "#81ff61" : "#ff6666";
+              let color =
+                state === 0 ? "white" : state === 1 ? "#81ff61" : "#ff6666";
               let className = `${currIndex > index ? "typed" : ""} ${
                 currIndex === index ? "curr-letter" : ""
               }`;

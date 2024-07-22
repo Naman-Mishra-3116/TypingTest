@@ -18,6 +18,7 @@ import Signup from "./formPages/Signup";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authFunction } from "../Store/authentication.store";
+import HomePageForError from "./components/HomePageForError";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ function App() {
     {
       path: "/",
       element: <RootElement />,
-      errorElement: <ErrorPage />,
+      errorElement: <HomePageForError />,
       children: [
         { index: true, element: <HomePage /> },
         { path: "/leaderboard", element: <LeaderBoard /> },

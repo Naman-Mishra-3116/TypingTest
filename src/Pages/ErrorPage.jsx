@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import MainNavigation from "../components/MainNavigation";
+import MainFooter from "../components/MainFooter";
 
 const ErrorPage = () => {
   return (

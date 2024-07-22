@@ -1,13 +1,13 @@
 import React from "react";
-import logo from "../../public/croped.png";
 import { NavLink } from "react-router-dom";
+import video from "/habibi.gif";
+
 import {
   styleFunctionForFirstLink,
   styleFunctionForLastLink,
   styleFunctionForMiddleLink,
 } from "../utils/navigationStyleFunction.function.js";
 import { useSelector } from "react-redux";
-
 
 const MainNavigation = () => {
   const isAuthticated = useSelector((state) => state.valid.isAuthticated);
@@ -22,7 +22,13 @@ const MainNavigation = () => {
             <span className="font-custom font-normal text-[20px] ml-3">by</span>
           </p>
           <NavLink to={"https://github.com/Naman-Mishra-3116/ReactTyping"}>
-            <img src={logo} alt="logo with the name" width={80} height={60} />
+            <img
+              src={video}
+              alt="logo with the name"
+              width={80}
+              height={40}
+              className="video"
+            />
           </NavLink>
         </h2>
 

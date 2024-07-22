@@ -36,7 +36,7 @@ body {
 }
 
 .typed {
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .typed.scroll-out {
@@ -74,6 +74,10 @@ body {
 }
 
 .cursor {
-  border-right: 1px solid white;
+  border-right: 2px solid white;
   animation: blink 1s step-end infinite;
+}
+
+.video {
+  /* mix-blend-mode: multiply; */
 }

@@ -1,8 +1,7 @@
-import React from "react";
-import { forwardRef, useRef, useState } from "react";
+import React, { useEffect, useState, useRef, forwardRef } from "react";
 import { FiRefreshCcw } from "react-icons/fi";
 
-const InputForTyping = forwardRef(
+const InputBox = forwardRef(
   (
     {
       onKeyDownHandler,
@@ -10,10 +9,34 @@ const InputForTyping = forwardRef(
       correctChar,
       onChangeInputHandler,
       typingInput,
+      updateKey,
     },
     ref
   ) => {
     const iconRef = useRef();
+    const [timer, setTimer] = useState(10);
+    const [hasStarted, setHasStarted] = useState(false);
+
+    useEffect(() => {
+      let timerInterval;
+      if (timer === 0 && hasStarted === true) {
+        ref.current.blur();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      if (hasStarted) {
+        if (timer > 0) {
+          timerInterval = setInterval(() => {
+            setTimer((prevTimer) => prevTimer - 1);
+          }, 1000);
+        } else {
+          clearInterval(timerInterval);
+        }
+      }
+
+      return () => clearInterval(timerInterval);
+    }, [timer, hasStarted]);
+
     const onClickResetButton = () => {
       if (iconRef.current) {
         iconRef.current.classList.add("rotate-animation");
@@ -22,31 +45,40 @@ const InputForTyping = forwardRef(
           if (iconRef.current) {
             iconRef.current.classList.remove("rotate-animation");
           }
-        }, 500);
-        window.location.reload();
+          updateKey((prev) => String(prev + 1).toString());
+          setHasStarted(false);
+        }, 600);
       }
+    };
+
+    const handleInputChange = (e) => {
+      if (!hasStarted) {
+        setHasStarted(true);
+      }
+      onChangeInputHandler(e);
     };
 
     return (
       <div className="w-[80%] flex gap-2 ml-auto mr-auto mt-4">
         <input
           type="text"
-          className="mr-[12px] text-white h-[60px] w-[60%] bg-secondary-back focus:outline-none  focus:ring-[#1585e0] ring-2 ring-[#2b2b2b] rounded-md mb-2 text-[21px] p-4 "
+          className={`mr-[12px] text-white h-[60px] w-[60%] bg-secondary-back focus:outline-none focus:ring-[#1585e0] ring-2 ring-[#2b2b2b] rounded-md mb-2 text-[21px] p-4 ${
+            timer > 0 ? "pointer-events-auto" : "pointer-events-none"
+          }`}
           ref={ref}
           onKeyDown={onKeyDownHandler}
-          onChange={onChangeInputHandler}
+          onChange={handleInputChange}
           value={typingInput}
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
         />
+
         <div className="h-[60px] bg-secondary-back p-5 mr-[12px] rounded-md w-[120px] text-lg flex justify-center items-center">
-          <span>
-            {Math.round(((60 / duration) * correctChar) / 5).toString()}
-          </span>
+          <span> {Math.round((correctChar / 5) * (60 / 60))}</span>
         </div>
         <div className="h-[60px] w-[120px] bg-secondary-back p-5 rounded-md text-lg mr-[12px] flex justify-center items-center">
-          <span>Timer</span>
+          <span>{timer}</span>
         </div>
         <button
           className="h-[60px] w-[85px] bg-secondary-back rounded-md hover:bg-secondary-blue flex justify-center items-center"
@@ -61,4 +93,4 @@ const InputForTyping = forwardRef(
   }
 );
 
-export default InputForTyping;
+export default InputBox;

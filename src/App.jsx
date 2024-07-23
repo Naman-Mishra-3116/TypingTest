@@ -15,9 +15,10 @@ import ChangePassword from "./formPages/ChangePassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signup from "./formPages/Signup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authFunction } from "../Store/authentication.store";
+import { getId } from "./utils/getId";
 import HomePageForError from "./components/HomePageForError";
 
 function App() {
@@ -56,14 +57,17 @@ function App() {
   useEffect(() => {
     getLoginUserData();
   }, []);
-
+  const [currentKey, setCurrentKey] = useState(getId());
   const router = createBrowserRouter([
     {
       path: "/",
       element: <RootElement />,
       errorElement: <HomePageForError />,
       children: [
-        { index: true, element: <HomePage /> },
+        {
+          index: true,
+          element: <HomePage key={currentKey} updateKey={setCurrentKey} />,
+        },
         { path: "/leaderboard", element: <LeaderBoard /> },
         { path: "/about", element: <About /> },
         { path: "/login", element: <Login /> },

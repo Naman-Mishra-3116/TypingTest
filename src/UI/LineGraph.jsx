@@ -83,7 +83,7 @@ const LineGraph = ({ data }) => {
           display: false,
         },
         ticks: {
-          stepSize: 1,
+          stepSize: 10,
         },
       },
       y2: {

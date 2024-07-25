@@ -11,9 +11,9 @@ export const passWordValidationMiddeWare = function (req, res, next) {
       });
     }
     const schema = Joi.object({
-      currentPassword: Joi.string().min(6).max(10).required(),
-      newPassword: Joi.string().min(6).max(10).required(),
-      confirmPassword: Joi.string().min(6).max(10).required(),
+      currentPassword: Joi.string().min(6).max(20).required(),
+      newPassword: Joi.string().min(6).max(20).required(),
+      confirmPassword: Joi.string().min(6).max(20).required(),
     });
 
     const { error } = schema.validate({

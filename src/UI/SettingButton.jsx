@@ -12,12 +12,16 @@ const SettingButton = ({
   const [currentIndex, setIndex] = useState(defaultSettingIndex);
 
   const onClickButton = function (i) {
-    setIndex(i);
-    localStorage.setItem(storageReference, i);
-    settingFunction(listOfAction[i].intent);
-    if (storageReference != "showwpm" && storageReference != "showTimer") {
-      updateKey((prev) => String(prev + 1));
-    } 
+    try {
+      setIndex(i);
+      localStorage.setItem(storageReference, i);
+      settingFunction(listOfAction[i].intent);
+      if (storageReference != "showwpm" && storageReference != "showTimer") {
+        updateKey((prev) => String(prev + 1));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -17,6 +17,7 @@ export const useGameHook = function (duration) {
   const incorrectWords = useRef(0);
   const prevIncorrectchars = useRef(0);
   const graphData = useRef([]);
+  const totalTypedWord = useRef(0);
 
   useEffect(() => {
     maxWidth.current = divRef.current.getBoundingClientRect().right - 150;
@@ -97,10 +98,15 @@ export const useGameHook = function (duration) {
       typedWord.current += 1;
       graphData.current.push({
         wpm: Math.round((correctChar / 4) * (60 / duration)),
-        accuracy: Math.round((correctChar * 100) / (correctChar + errorChar)),
+        accuracy:
+          Math.round((correctChar * 100) / (correctChar + errorChar)) === NaN
+            ? 0
+            : Math.round((correctChar * 100) / (correctChar + errorChar)),
         cWords: correctWords.current,
         iWords: incorrectWords.current,
+        wordNumber: totalTypedWord.current,
       });
+      totalTypedWord.current += 1;
     } catch (error) {
       console.log(error.message);
     }

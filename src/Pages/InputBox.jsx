@@ -37,7 +37,7 @@ const InputBox = forwardRef(
     useEffect(() => {
       let timerInterval;
       if (timer === 0 && hasStarted === true) {
-        setData(data);
+        setData(data.current);
         ref.current.blur();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }

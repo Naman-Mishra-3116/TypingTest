@@ -5,10 +5,9 @@ import InputBox from "./InputBox";
 import TextBox from "./TextBox";
 import { useSettingGameHook } from "../Hooks/useGameSettingHook";
 import SettingButton from "../UI/SettingButton";
+import LineGraph from "./../UI/LineGraph";
 
 const HomePage = ({ updateKey }) => {
-  const [data, setData] = useState(null);
-
   const {
     time,
     setTime,
@@ -45,6 +44,8 @@ const HomePage = ({ updateKey }) => {
     onKeyDownHandler,
     graphData,
   } = useGameHook(time);
+
+  const [data, setData] = useState(null);
 
   return (
     <div>
@@ -175,6 +176,10 @@ const HomePage = ({ updateKey }) => {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div className="ml-auto mr-auto h-[350px] mt-[100px] justify-stretch flex w-[80%]">
+        {data && <LineGraph data={data} />}
       </div>
     </div>
   );

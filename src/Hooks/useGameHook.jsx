@@ -4,11 +4,10 @@ import { generate } from "random-words";
 
 const generateRandomWords = () => generate(350).join(" ");
 
-export const useGameHook = function () {
+export const useGameHook = function (duration) {
   const divRef = useRef(null);
   const inputRef = useRef(null);
   const text = useMemo(() => generateRandomWords(), []);
-  const [duration, setDuration] = useState(60);
   const [, setTypeWrong] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const maxWidth = useRef();
@@ -17,6 +16,7 @@ export const useGameHook = function () {
   const correctWords = useRef(0);
   const incorrectWords = useRef(0);
   const prevIncorrectchars = useRef(0);
+  const graphData = useRef([]);
 
   useEffect(() => {
     maxWidth.current = divRef.current.getBoundingClientRect().right - 150;
@@ -95,6 +95,12 @@ export const useGameHook = function () {
       }
       prevIncorrectchars.current = errorChar;
       typedWord.current += 1;
+      graphData.current.push({
+        wpm: Math.round((correctChar / 4) * (60 / duration)),
+        accuracy: Math.round((correctChar * 100) / (correctChar + errorChar)),
+        cWords: correctWords.current,
+        iWords: incorrectWords.current,
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -118,8 +124,6 @@ export const useGameHook = function () {
     divRef,
     inputRef,
     text,
-    duration,
-    setDuration,
     correctWords,
     incorrectWords,
     correctChar,
@@ -129,5 +133,6 @@ export const useGameHook = function () {
     typingInput,
     onChangeInputHandler,
     onKeyDownHandler,
+    graphData,
   };
 };

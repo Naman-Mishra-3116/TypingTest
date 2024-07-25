@@ -36,7 +36,7 @@ body {
 }
 
 .typed {
-  transition: opacity 0.1s;
+  transition: opacity 0.1s ;
 }
 
 .typed.scroll-out {

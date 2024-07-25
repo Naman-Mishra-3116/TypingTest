@@ -12,34 +12,34 @@ const About = () => {
         <div className="flex flex-col gap-2 text-left bg-secondary-back p-4 mt-5 rounded-md">
           <p>
             Correct Characters &mdash; &nbsp;
-            <span className="text-gray-500">
+            <span className="text-[#666565]">
               Number of characters in correctly typed words.
             </span>
           </p>
           <p>
-            Incorrect Characters  &mdash; &nbsp;
-            <span className="text-gray-500">
+            Incorrect Characters &mdash; &nbsp;
+            <span className=" text-[#666565]">
               Number of characters in words with at least one incorrect
               character.
             </span>
           </p>
           <p>
-            Words per Minute (WPM)  &mdash; &nbsp;
-            <span className="text-gray-500">
+            Words per Minute (WPM) &mdash; &nbsp;
+            <span className=" text-[#666565]">
               Correct characters, divided by 5, and divided by the test duration
               in minutes.
             </span>
           </p>
           <p>
-            Accuracy  &mdash; &nbsp;
-            <span className="text-gray-500">
+            Accuracy &mdash; &nbsp;
+            <span className=" text-[#666565]">
               Number of characters in correctly typed words, divided by the
               number of characters in all words, as a percentage.
             </span>
           </p>
           <p>
-            Raw WPM  &mdash; &nbsp;
-            <span className="text-gray-500">
+            Raw WPM &mdash; &nbsp;
+            <span className=" text-[#666565]">
               WPM for characters in all words, regardless of if they were
               correct or not.
             </span>

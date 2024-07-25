@@ -1,0 +1,15 @@
+1. - Create a state for timer  @done
+
+2.-divide the homepage component into seperate component. @done
+
+3. -create a setting utitlity component.@done
+4. create a chartJS graph after each test taken based on the result.
+5. Save the user setting to the localstorage and write logic to get that with every render.
+6. Try breaking useGameHook into its own Context. !!testing in a seperate compoenent without disturbing  the  current actvity.
+7. --Change the slate color to the actual color of the page. @done
+
+
+
+
+# to be done by the end of 24th  july 2024
+

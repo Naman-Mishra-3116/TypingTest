@@ -179,7 +179,7 @@ const HomePage = ({ updateKey }) => {
       </div>
 
       <div className="ml-auto mr-auto h-[350px] mt-[100px] justify-stretch flex w-[80%]">
-        {data && <LineGraph data={data} />}
+        {data && <LineGraph data={data} time={time}/>}
       </div>
     </div>
   );

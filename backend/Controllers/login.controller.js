@@ -28,7 +28,7 @@ export const loginControllerFunction = async function (req, res) {
     }
 
     const jwtToken = jsonwebtoken.sign(
-      { email, username: existingUser.username },
+      { email, username: existingUser.username, id:existingUser._id },
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );

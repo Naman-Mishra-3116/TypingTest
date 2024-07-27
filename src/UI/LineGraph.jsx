@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import { createToast } from "../../utils/createToast";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,10 +22,54 @@ ChartJS.register(
   Tooltip
 );
 
-const LineGraph = ({ data }) => {
+const LineGraph = ({ data, time }) => {
   if (!data) {
     return null;
   }
+
+  const isAuthticated = useSelector((state) => state.valid.isAuthticated);
+
+  const token = useSelector((state) => state.valid.jwtToken);
+
+  useEffect(() => {
+    const submitTestDataForLoggedInUser = async function () {
+      try {
+        const { wpm, accuracy } = data[data.length - 1];
+        const taken = new Intl.DateTimeFormat("en-IN", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        }).format(new Date());
+        const response = await fetch("http://localhost:5000/test/submitTest", {
+          method: "POST",
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ wpm, taken, accuracy, time }),
+        });
+        const { success, error } = await response.json();
+        if (success) {
+          return;
+        } else if (error) {
+          throw new Error(error.message);
+        }
+      } catch (error) {
+        console.log(
+          "Error in sending test data to the frontend!",
+          error.message
+        );
+      }
+    };
+    if (isAuthticated) {
+      submitTestDataForLoggedInUser();
+    } else {
+      createToast("Login to Save your result!", "info");
+    }
+  }, [time, token, isAuthticated]);
 
   const wordPerMinuteData = data.map((item) => item.wpm);
   const wordNumber = data.map((item) => item.wordNumber);

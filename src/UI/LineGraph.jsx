@@ -6,7 +6,6 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Legend,
   Title,
   Tooltip,
 } from "chart.js";
@@ -26,9 +25,6 @@ const LineGraph = ({ data }) => {
   }
 
   const wordPerMinuteData = data.map((item) => item.wpm);
-  const accuracyData = data.map((item) =>
-    item.accuracy === Number.isNaN(item.accuracy) ? 0 : item.accuracy
-  );
   const wordNumber = data.map((item) => item.wordNumber);
   const incorrectWords = data.map((item) => item.iWords);
 

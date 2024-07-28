@@ -8,7 +8,7 @@ import RootElement from "../src/Pages/RootElement";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import LeaderBoard from "./Pages/LeaderBoard";
 import HomePage from "./Pages/HomePage";
-import StatsPage from "./Stats/StatsPage";
+import SettingsPage from "./Stats/SettingsPage";
 import DetailsPage from "./Stats/Details";
 import UpdateEmail from "./formPages/UpdateEmail";
 import ChangePassword from "./formPages/ChangePassword";
@@ -19,8 +19,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authFunction } from "../Store/authentication.store";
 import { getId } from "./utils/getId";
-import HomePageForError from "./components/HomePageForError";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -63,7 +61,7 @@ function App() {
     {
       path: "/",
       element: <RootElement />,
-      errorElement: <HomePageForError />,
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,
@@ -76,16 +74,19 @@ function App() {
           path: "/signup",
           element: <Signup />,
         },
+        {
+          path: "/stats",
+          element: <DetailsPage />,
+        },
         { path: "/reset", element: <Reset /> },
         { path: "/privacy", element: <PrivacyPolicy /> },
         {
-          path: "/stats",
-          element: <StatsPage />,
+          path: "/settings",
+          element: <SettingsPage />,
           errorElement: <ErrorPage />,
           children: [
-            { index: true, element: <DetailsPage /> },
-            { path: "/stats/changeEmail", element: <UpdateEmail /> },
-            { path: "/stats/changePassword", element: <ChangePassword /> },
+            { index: true, element: <UpdateEmail /> },
+            { path: "/settings/changePassword", element: <ChangePassword /> },
           ],
         },
       ],

@@ -45,18 +45,17 @@ const MainNavigation = () => {
             LeaderBoard
           </NavLink>
           <NavLink
-            to={"/discord"}
-            target="_blank"
+            to={"/stats"}
             className={styleFunctionForMiddleLink}
             end
           >
-            Discord
+            Stats
           </NavLink>
           <NavLink to={"/about"} end className={styleFunctionForMiddleLink}>
             About
           </NavLink>
           {isAuthticated ? (
-            <NavLink to={"/stats"} end className={styleFunctionForLastLink}>
+            <NavLink to={"/settings"} end className={styleFunctionForLastLink}>
               {username}
             </NavLink>
           ) : (

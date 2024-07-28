@@ -4,30 +4,27 @@ import { styleFunctionForMiddleLink } from "../utils/navigationStyleFunction.fun
 import { useDispatch } from "react-redux";
 import { authFunction } from "../../Store/authentication.store";
 
-const StatsNavigation = () => {
+const SettingsNavigation = () => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-col gap-8">
       <p className="bg-secondary-back p-4 rounded-md self-center mt-8 mb-5">
-        Account & Security
+        Account & Security Settings
       </p>
       <nav className="flex gap-4 self-center mb-5">
-        <NavLink to={"/stats"} end className={styleFunctionForMiddleLink}>
-          Statistics
-        </NavLink>
         <NavLink
-          to={"/stats/changeEmail"}
+          to={"/settings"}
           end
           className={styleFunctionForMiddleLink}
         >
           Change Email
         </NavLink>
         <NavLink
-          to={"/stats/changePassword"}
+          to={"/settings/changePassword"}
           end
           className={styleFunctionForMiddleLink}
           onClick={() => {
-            window.scrollTo({ behavior: "smooth", top: 300});
+            window.scrollTo({ behavior: "smooth", top: 300 });
           }}
         >
           Change Password
@@ -57,4 +54,4 @@ const StatsNavigation = () => {
   );
 };
 
-export default StatsNavigation;
+export default SettingsNavigation;

@@ -9,7 +9,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import LeaderBoard from "./Pages/LeaderBoard";
 import HomePage from "./Pages/HomePage";
 import SettingsPage from "./Stats/SettingsPage";
-import DetailsPage from "./Stats/Details";
+import StatsPage from "./Pages/StatsPage";
 import UpdateEmail from "./formPages/UpdateEmail";
 import ChangePassword from "./formPages/ChangePassword";
 import { ToastContainer } from "react-toastify";
@@ -76,7 +76,7 @@ function App() {
         },
         {
           path: "/stats",
-          element: <DetailsPage />,
+          element: <StatsPage />,
         },
         { path: "/reset", element: <Reset /> },
         { path: "/privacy", element: <PrivacyPolicy /> },

@@ -1,7 +1,4 @@
 import React, { forwardRef } from "react";
-
-
-
 const TextBox = forwardRef(({ charsState, currIndex, text }, ref) => {
   return (
     <div className="bg-secondary-back w-[80%] ml-auto mr-auto mt-10 h-[130px] overflow-hidden rounded-md typing-test outline-none pt-1 pb-1 text-left pl-3 pr-3">

@@ -24,6 +24,23 @@ const TestSchema = new Schema({
     type: String,
     required: true,
   },
+  errorChar: {
+    type: Number,
+    required: true,
+  },
+  correctChar: {
+    type: Number,
+    required: true,
+  },
+  raw: {
+    type: Number,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
+TestSchema.index({ createdAt: 1 }, { expireAfterSeconds: 3600 });
 
 export const Test = new mongoose.model("tests", TestSchema);

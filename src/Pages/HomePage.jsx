@@ -11,11 +11,8 @@ const HomePage = ({ updateKey }) => {
   const {
     time,
     setTime,
-    wordType,
     setWordType,
-    number,
     setNumber,
-    punc,
     setPunc,
     showWPM,
     setShowWPM,
@@ -42,6 +39,7 @@ const HomePage = ({ updateKey }) => {
     typingInput,
     onChangeInputHandler,
     onKeyDownHandler,
+    submitWord,
     graphData,
   } = useGameHook(time);
 
@@ -71,6 +69,7 @@ const HomePage = ({ updateKey }) => {
         setData={setData}
         showWPM={showWPM}
         showTimer={showTimer}
+        submitWord={submitWord}
       />
 
       <div className="flex gap-[40px] mt-[3rem] ml-auto mr-auto w-[80%] justify-center items-center">
@@ -179,7 +178,16 @@ const HomePage = ({ updateKey }) => {
       </div>
 
       <div className="ml-auto mr-auto h-[350px] mt-[100px] justify-stretch flex w-[80%]">
-        {data && <LineGraph data={data} time={time}/>}
+        {data && (
+          <LineGraph
+            data={data}
+            time={time}
+            errorChar={errorChar}
+            correctChar={correctChar}
+            raw={Math.round((correctChar + errorChar) / 4 / (time / 60))}
+
+          />
+        )}
       </div>
     </div>
   );

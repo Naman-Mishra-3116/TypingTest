@@ -140,5 +140,6 @@ export const useGameHook = function (duration) {
     onChangeInputHandler,
     onKeyDownHandler,
     graphData,
+    submitWord
   };
 };

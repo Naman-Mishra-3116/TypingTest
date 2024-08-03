@@ -22,7 +22,7 @@ ChartJS.register(
   Tooltip
 );
 
-const LineGraph = ({ data, time }) => {
+const LineGraph = ({ data, time, errorChar, correctChar, raw }) => {
   if (!data) {
     return null;
   }
@@ -30,17 +30,20 @@ const LineGraph = ({ data, time }) => {
   const isAuthticated = useSelector((state) => state.valid.isAuthticated);
 
   const token = useSelector((state) => state.valid.jwtToken);
+;
 
   useEffect(() => {
     const submitTestDataForLoggedInUser = async function () {
       try {
         const { wpm, accuracy } = data[data.length - 1];
+
         const taken = new Intl.DateTimeFormat("en-IN", {
           year: "numeric",
           month: "numeric",
           day: "numeric",
           hour: "numeric",
           minute: "numeric",
+          second: "2-digit",
           hour12: true,
         }).format(new Date());
         const response = await fetch("http://localhost:5000/test/submitTest", {
@@ -49,7 +52,15 @@ const LineGraph = ({ data, time }) => {
             Authorization: token,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ wpm, taken, accuracy, time }),
+          body: JSON.stringify({
+            wpm,
+            taken,
+            accuracy,
+            time,
+            errorChar,
+            correctChar,
+            raw,
+          }),
         });
         const { success, error } = await response.json();
         if (success) {
@@ -74,6 +85,8 @@ const LineGraph = ({ data, time }) => {
   const wordPerMinuteData = data.map((item) => item.wpm);
   const wordNumber = data.map((item) => item.wordNumber);
   const incorrectWords = data.map((item) => item.iWords);
+  wordNumber[wordNumber.length-1] = wordNumber[wordNumber.length-2]+1;
+  
 
   const mapingData = {
     labels: wordNumber,

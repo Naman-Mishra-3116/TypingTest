@@ -1,8 +1,7 @@
-- Write api's for sending typing data to the backend server.
-- create mongoDb refernce for storing user's stat data
-- create a confirmation model for deleting user's account
-- create an api for password reseting for user.
+- Create a table Page for StatsPage showing user's today's data of typing. @done
+- Create a leaderBoard Page for showing Current day's Best Typing 50 only.
+- Create an API for password resetting.
 
-to be done by the end of today 26th july 2024.
+
 
 

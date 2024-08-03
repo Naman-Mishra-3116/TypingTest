@@ -16,10 +16,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signup from "./formPages/Signup";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authFunction } from "../Store/authentication.store";
 import { getId } from "./utils/getId";
-
 function App() {
   const dispatch = useDispatch();
   const getLoginUserData = async function () {
@@ -41,9 +40,14 @@ function App() {
           data: { email, username },
         } = await response.json();
         if (success) {
-          dispatch(authFunction.setName({ name: username }));
-          dispatch(authFunction.setAuthenticated({ auth: true }));
-          dispatch(authFunction.setEmail({ email }));
+          dispatch(
+            authFunction.setAllData({
+              email,
+              auth: true,
+              token,
+              name: username,
+            })
+          );
         } else if (error) {
           localStorage.removeItem("token");
         } else if (!success) {
@@ -57,6 +61,7 @@ function App() {
     getLoginUserData();
   }, []);
   const [currentKey, setCurrentKey] = useState(getId());
+
   const router = createBrowserRouter([
     {
       path: "/",

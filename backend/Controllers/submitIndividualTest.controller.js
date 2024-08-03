@@ -3,10 +3,20 @@ import { User } from "../Models/User.models.js";
 
 export const submitIndiviudalTestController = async function (req, res) {
   try {
-    const { wpm, accuracy, time, taken } = req.body;
+    const { wpm, accuracy, time, taken, raw, errorChar, correctChar } =
+      req.body;
     const { id } = JSON.parse(req.user);
 
-    const newTest = new Test({ userId: id, wpm, accuracy, time, taken });
+    const newTest = new Test({
+      userId: id,
+      wpm,
+      accuracy,
+      time,
+      taken,
+      raw,
+      errorChar,
+      correctChar,
+    });
     const savedTest = await newTest.save();
     await User.findByIdAndUpdate(id, { $push: { tests: savedTest._id } });
 

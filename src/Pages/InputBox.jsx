@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  forwardRef,
-} from "react";
+import React, { useEffect, useState, useRef, forwardRef } from "react";
 import { FiRefreshCcw } from "react-icons/fi";
 
 const InputBox = forwardRef(
@@ -19,6 +14,9 @@ const InputBox = forwardRef(
       showWPM,
       showTimer,
       setData,
+      errorChar,
+      rightWords,
+      wrongWords,
     },
     ref
   ) => {
@@ -37,6 +35,13 @@ const InputBox = forwardRef(
     useEffect(() => {
       let timerInterval;
       if (timer === 0 && hasStarted === true) {
+        data.current.push({
+          wpm: Math.round((correctChar / 4) * (60 / duration)),
+          accuracy: Math.round((correctChar * 100) / (correctChar + errorChar)),
+          cWords: rightWords,
+          iWords: wrongWords,
+          test: "hello world",
+        });
         setData(data.current);
         ref.current.blur();
         window.scrollTo({ top: 0, behavior: "smooth" });

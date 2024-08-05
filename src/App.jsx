@@ -16,9 +16,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signup from "./formPages/Signup";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authFunction } from "../Store/authentication.store";
 import { getId } from "./utils/getId";
+
 function App() {
   const dispatch = useDispatch();
   const getLoginUserData = async function () {

@@ -26,16 +26,20 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  tests:[
+  token: {
+    type: String,
+    default: "",
+  },
+  tests: [
     {
-      type:Schema.Types.ObjectId,
-      ref:"tests"
-    }
-  ]
+      type: Schema.Types.ObjectId,
+      ref: "tests",
+    },
+  ],
 });
 
 /**
  * @User = this is the record or the document structure which will collectively form the collection in the database.
-*/
+ */
 
 export const User = new mongoose.model("users", UserSchema);

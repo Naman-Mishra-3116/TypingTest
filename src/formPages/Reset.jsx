@@ -1,23 +1,29 @@
 import React from "react";
 import Input from "../UI/Input";
 import NavigationFor from "../UI/NavigationFor";
-import { useNavigate } from "react-router-dom";
+import { createToast } from "../../utils/createToast";
 
 const Reset = () => {
-  const navigator = useNavigate();
+ 
 
-  
-  function onClickResetButton(event) {
+  const onClickResetButton = async (event) => {
     event.preventDefault();
     const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    console.log(data);
-
-    // reset api in progress.
-
-
-    navigator("/login");
-  }
+    const { email } = Object.fromEntries(fd.entries());
+    const response = await fetch("http://localhost:5000/forgetPassword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+    const { message, success, error } = await response.json();
+    if (message === "User does not exist" && success === false) {
+      createToast("User with specified email does not exist", "error");
+    } else if (success === true && message !== "") {
+      createToast(message, "success");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center">

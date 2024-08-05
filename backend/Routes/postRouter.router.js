@@ -7,7 +7,8 @@ import { enusreAuthenticatedMiddleware } from "./../Middlewares/ensureAuthentica
 import { passWordValidationMiddeWare } from "../Middlewares/passwordValidation.middleware.js";
 import { changePasswordControllerFunction } from "../Controllers/changePassword.controller.js";
 import { submitIndiviudalTestController } from "../Controllers/submitIndividualTest.controller.js";
-
+import { forgetPasswordControllerFunction } from "../Controllers/forgetPassword.controller.js";
+import { forgetPasswordPostRouter } from "../Controllers/forgetPasswordPostRouter.js";
 const router = Router();
 
 /**
@@ -45,5 +46,14 @@ router.post(
   enusreAuthenticatedMiddleware,
   submitIndiviudalTestController
 );
+
+/**
+ * @forgetPassword Post router that will be hit when the user wants to reset his or her password.
+ * @unauth Router hsa no authentication because user will be definately logged out while resetting the password.
+ *
+ */
+router.post("/forgetPassword", forgetPasswordControllerFunction);
+
+router.post("/resetPassword/:id/:token", forgetPasswordPostRouter);
 
 export { router as postRouter };

@@ -3,12 +3,27 @@ import Input from "../UI/Input";
 import { useSelector } from "react-redux";
 const UpdateEmail = () => {
   const email = useSelector((state) => state.valid.email);
-  function onClickEmailChangeButton(event) {
-    event.preventDefault();
-    const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    console.log(data);
-  }
+  const onClickEmailChangeButton = async (event) => {
+    try {
+      event.preventDefault();
+      const fd = new FormData(event.target);
+      const { email } = Object.fromEntries(fd.entries());
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:5000/auth/changeEmail", {
+        method: "POST",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
+      const { success, error, message } = await response.json();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center">

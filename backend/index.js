@@ -29,7 +29,13 @@ const PORT = process.env.PORT || 5000;
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: [""],
+    methods: ["GET", "POST", "DELETE", "PATCH", "PUT"],
+    credentials: true,
+  })
+);
 
 /**
  * @router = get for testing purpose.

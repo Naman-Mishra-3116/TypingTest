@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { createToast } from "../../utils/createToast";
 import { useSelector } from "react-redux";
 import Row from "../UI/Row";
 
@@ -45,7 +44,6 @@ const StatsPage = () => {
       <div className="flex flex-col">
         <div className="w-[80%] self-center mt-3">
           <h2 className="mt-10 text-2xl"> Please login to see your results</h2>
-          {/* {createToast("Please wait your data is being fetched", "info")} */}
         </div>
       </div>
     );
